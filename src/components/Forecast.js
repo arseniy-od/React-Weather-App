@@ -3,7 +3,7 @@ import axios from "axios";
 import ReactAnimatedWeather from "react-animated-weather";
 
 function Forecast({ weather }) {
-  const data = weather;
+  const { data } = weather;
   console.log("data", data);
   const [forecastData, setForecastData] = useState([]);
   const [isCelsius, setIsCelsius] = useState(true); // Track temperature unit
@@ -11,8 +11,8 @@ function Forecast({ weather }) {
   useEffect(() => {
     const fetchForecastData = async () => {
       const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-      // const url = `https://api.shecodes.io/weather/v1/forecast?query=${data.city}&key=${apiKey}&units=metric`;
-      const url = "";
+      const url = `https://api.shecodes.io/weather/v1/forecast?query=${data.city}&key=${apiKey}&units=metric`;
+      // const url = "";
       const cachedData = {
         city: "Zaporizhzhia",
         country: "Ukraine",
@@ -146,8 +146,8 @@ function Forecast({ weather }) {
       };
       try {
         const response = await axios.get(url);
-        // setForecastData(response.data.daily);
-        setForecastData(cachedData.daily);
+        setForecastData(response.data.daily);
+        // setForecastData(cachedData.daily);
       } catch (error) {
         console.log("Error fetching forecast data:", error);
       }

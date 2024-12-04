@@ -41,36 +41,9 @@ export const setDefaultCities = (setQuery) => {
 export const fetchWeather = async ({ query, weather, setWeather }) => {
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
   const url = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${apiKey}`;
-  //   const url = "";
-  const cachedData = {
-    city: "Zaporizhzhia",
-    country: "Ukraine",
-    coordinates: {
-      longitude: 35.1182867,
-      latitude: 47.8507859,
-    },
-    condition: {
-      description: "scattered clouds",
-      icon_url:
-        "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png",
-      icon: "scattered-clouds-day",
-    },
-    temperature: {
-      current: 2.88,
-      humidity: 63,
-      feels_like: 0.17,
-      pressure: 1025,
-    },
-    wind: {
-      speed: 2.75,
-      degree: 56,
-    },
-    time: 1733315980,
-  };
   try {
     const response = await axios.get(url);
     setWeather({ data: response.data, loading: false, error: false });
-    // setWeather({ data: cachedData, loading: false, error: false });
   } catch (error) {
     setWeather({ data: {}, loading: false, error: true });
     console.log("error", error);

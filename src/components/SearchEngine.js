@@ -67,7 +67,6 @@ function SearchEngine({ setQuery }) {
           <ul className="suggestions-dropdown">
             {suggestions.map((suggestion, index) => (
               <li key={index} onClick={() => handleSuggestionClick(suggestion.city)}>
-                {/* //todo: check how api works with full address */}
                 {suggestion.address_line1}, {suggestion.address_line2}
               </li>
             ))}

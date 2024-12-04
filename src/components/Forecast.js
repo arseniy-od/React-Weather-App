@@ -3,18 +3,151 @@ import axios from "axios";
 import ReactAnimatedWeather from "react-animated-weather";
 
 function Forecast({ weather }) {
-  const { data } = weather;
+  const data = weather;
+  console.log("data", data);
   const [forecastData, setForecastData] = useState([]);
   const [isCelsius, setIsCelsius] = useState(true); // Track temperature unit
 
   useEffect(() => {
     const fetchForecastData = async () => {
-      const apiKey = "b03a640e5ef6980o4da35b006t5f2942";
-      const url = `https://api.shecodes.io/weather/v1/forecast?query=${data.city}&key=${apiKey}&units=metric`;
-
+      const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+      // const url = `https://api.shecodes.io/weather/v1/forecast?query=${data.city}&key=${apiKey}&units=metric`;
+      const url = "";
+      const cachedData = {
+        city: "Zaporizhzhia",
+        country: "Ukraine",
+        coordinates: {
+          longitude: 35.1182867,
+          latitude: 47.8507859,
+        },
+        daily: [
+          {
+            condition: {
+              description: "few clouds",
+              icon_url:
+                "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png",
+              icon: "few-clouds-day",
+            },
+            temperature: {
+              day: 3.14,
+              minimum: -1.8,
+              maximum: 3.3,
+              humidity: 60,
+            },
+            wind: {
+              speed: 3.53,
+            },
+            time: 1733302800,
+          },
+          {
+            condition: {
+              description: "overcast clouds",
+              icon_url:
+                "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-day.png",
+              icon: "broken-clouds-day",
+            },
+            temperature: {
+              day: 3.69,
+              minimum: 1.21,
+              maximum: 4.24,
+              humidity: 73,
+            },
+            wind: {
+              speed: 4.74,
+            },
+            time: 1733389200,
+          },
+          {
+            condition: {
+              description: "light rain",
+              icon_url: "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-day.png",
+              icon: "rain-day",
+            },
+            temperature: {
+              day: 4.12,
+              minimum: 2.89,
+              maximum: 5.51,
+              humidity: 87,
+            },
+            wind: {
+              speed: 4.52,
+            },
+            time: 1733475600,
+          },
+          {
+            condition: {
+              description: "light rain",
+              icon_url: "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-day.png",
+              icon: "rain-day",
+            },
+            temperature: {
+              day: 6.36,
+              minimum: 4.55,
+              maximum: 7.61,
+              humidity: 79,
+            },
+            wind: {
+              speed: 6.92,
+            },
+            time: 1733562000,
+          },
+          {
+            condition: {
+              description: "moderate rain",
+              icon_url: "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-day.png",
+              icon: "rain-day",
+            },
+            temperature: {
+              day: 6.36,
+              minimum: 4.98,
+              maximum: 6.62,
+              humidity: 81,
+            },
+            wind: {
+              speed: 8.2,
+            },
+            time: 1733648400,
+          },
+          {
+            condition: {
+              description: "light rain",
+              icon_url: "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-day.png",
+              icon: "rain-day",
+            },
+            temperature: {
+              day: 10.36,
+              minimum: 7.61,
+              maximum: 11.11,
+              humidity: 73,
+            },
+            wind: {
+              speed: 7.87,
+            },
+            time: 1733734800,
+          },
+          {
+            condition: {
+              description: "light rain",
+              icon_url: "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-day.png",
+              icon: "rain-day",
+            },
+            temperature: {
+              day: 9.54,
+              minimum: 3.95,
+              maximum: 9.94,
+              humidity: 82,
+            },
+            wind: {
+              speed: 4.44,
+            },
+            time: 1733821200,
+          },
+        ],
+      };
       try {
         const response = await axios.get(url);
-        setForecastData(response.data.daily);
+        // setForecastData(response.data.daily);
+        setForecastData(cachedData.daily);
       } catch (error) {
         console.log("Error fetching forecast data:", error);
       }

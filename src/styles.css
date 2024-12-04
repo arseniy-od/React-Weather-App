@@ -24,6 +24,7 @@ body {
 }
 
 .SearchEngine {
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -375,4 +376,34 @@ body {
     font-size: 14px;
     width: 100%;
   }
+}
+
+.suggestions-dropdown {
+  top: 3rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  position: absolute;
+  width: 93%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  z-index: 10;
+}
+
+.suggestions-dropdown li {
+  text-align: left;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
 }

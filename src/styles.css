@@ -24,6 +24,7 @@ body {
 }
 
 .SearchEngine {
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -302,6 +303,50 @@ body {
   }
 }
 
+.suggestions-dropdown {
+  top: 3rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  position: absolute;
+  width: 93%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  z-index: 10;
+}
+
+.suggestions-dropdown li {
+  text-align: left;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.add-city-button {
+  padding-left: 1rem;  
+  padding-right: 1rem; 
+  padding-top: 0.5rem; 
+  padding-bottom: 0.5rem; 
+  border-radius: 0.5rem; 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); 
+  margin: 1rem;
+  border: none;
+  font-weight: 600;
+  font-size: 22px;
+  cursor: pointer;
+}
+
 /* Mobile view */
 @media screen and (max-width: 480px) {
   .App {
@@ -375,4 +420,5 @@ body {
     font-size: 14px;
     width: 100%;
   }
+  
 }

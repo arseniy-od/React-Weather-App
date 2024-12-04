@@ -76,3 +76,49 @@ export const fetchWeather = async ({ query, weather, setWeather }) => {
     console.log("error", error);
   }
 };
+
+export function exportToCSV(data) {
+  const headers = [
+    "City",
+    "Country",
+    "Date",
+    "Temperature (°C)",
+    "Description",
+    "Wind Speed (m/s)",
+    "Humidity (%)",
+    "Day",
+    "Min Temp (°C)",
+    "Max Temp (°C)",
+  ];
+
+  const rows = data
+    .map((item) =>
+      item.forecast
+        .map((forecast) =>
+          [
+            item.city,
+            item.country,
+            item.date,
+            item.currentTemp,
+            item.description,
+            item.windSpeed,
+            item.humidity,
+            forecast.day,
+            forecast.minTemp,
+            forecast.maxTemp,
+          ].join(",")
+        )
+        .join("\n")
+    )
+    .join("\n");
+
+  const csvContent = [headers.join(","), rows].join("\n");
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", "weather-data.csv");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}

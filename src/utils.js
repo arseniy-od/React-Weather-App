@@ -38,18 +38,6 @@ export const setDefaultCities = (setQuery) => {
   }
 };
 
-export const fetchWeather = async ({ query, weather, setWeather }) => {
-  const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-  const url = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${apiKey}`;
-  try {
-    const response = await axios.get(url);
-    setWeather({ data: response.data, loading: false, error: false });
-  } catch (error) {
-    setWeather({ data: {}, loading: false, error: true });
-    console.log("error", error);
-  }
-};
-
 export function exportToCSV(data) {
   const headers = [
     "City",

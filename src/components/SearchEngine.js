@@ -16,7 +16,6 @@ function SearchEngine({ setQuery }) {
         (res) => res.category === "populated_place"
       );
       setSuggestions(filteredSuggestions);
-      console.log("suggestions,", suggestions);
       setError(null);
     } catch (err) {
       console.error("Failed to fetch suggestions:", err);

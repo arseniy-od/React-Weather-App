@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import ReactAnimatedWeather from "react-animated-weather";
-import { days } from "../constants";
+import { AppContext } from "../context";
 
-function Forecast({ weather, setMainData, mainData, cityNumber }) {
+function Forecast({ weather, cityNumber }) {
   const { data } = weather;
   const [forecastData, setForecastData] = useState([]);
   const [isCelsius, setIsCelsius] = useState(true);
+  const { exportData, setExportData } = useContext(AppContext);
 
   useEffect(() => {
     if (forecastData.length) {
-      setMainData({
-        ...mainData,
+      setExportData({
+        ...exportData,
         [cityNumber]: {
-          ...mainData[cityNumber],
+          ...exportData[cityNumber],
           forecast: forecastData.map((f) => ({
             day: formatDay(f.time),
             minTemp: f.temperature.minimum,
@@ -59,10 +60,6 @@ function Forecast({ weather, setMainData, mainData, cityNumber }) {
 
   const toggleTemperatureUnit = () => {
     setIsCelsius((prevState) => !prevState);
-  };
-
-  const convertToCelsius = (temperature) => {
-    return Math.round((temperature - 32) * (5 / 9));
   };
 
   const convertToFahrenheit = (temperature) => {
@@ -141,6 +138,6 @@ function Forecast({ weather, setMainData, mainData, cityNumber }) {
       </div>
     </div>
   );
-}        
+}
 
 export default Forecast;

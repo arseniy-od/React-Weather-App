@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SearchEngine from "./SearchEngine";
 import Forecast from "./Forecast";
-import { setDefaultCities, fetchWeather } from "../utils";
+import useWeather from "../hooks/useWeather";
+import { setDefaultCities } from "../utils";
 
 import "../styles.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { AppContext } from "../context";
 
-function City({ fetchDefault, setMainData, mainData, cityNumber }) {
+function City({ fetchDefault, cityNumber }) {
   const [query, setQuery] = useState("");
-  const [weather, setWeather] = useState({
-    loading: true,
-    data: {},
-    error: false,
-  });
+  const { weather, setWeather, fetchWeather } = useWeather();
+  const { exportData, setExportData } = useContext(AppContext);
 
   useEffect(() => {
     if (weather.data.city) {
-      setMainData({
-        ...mainData,
+      setExportData({
+        ...exportData,
         [cityNumber]: {
           city: weather.data.city,
           country: weather.data.country,
@@ -42,7 +41,7 @@ function City({ fetchDefault, setMainData, mainData, cityNumber }) {
 
   useEffect(() => {
     if (query.length) {
-      fetchWeather({ query, weather, setWeather });
+      fetchWeather(query);
     }
   }, [query]);
 
@@ -69,12 +68,7 @@ function City({ fetchDefault, setMainData, mainData, cityNumber }) {
       )}
 
       {weather && weather.data && weather.data.condition && (
-        <Forecast
-          weather={weather}
-          setMainData={setMainData}
-          mainData={mainData}
-          cityNumber={cityNumber}
-        />
+        <Forecast weather={weather} cityNumber={cityNumber} />
       )}
     </div>
   );
